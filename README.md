@@ -2,10 +2,12 @@
 Now uses tweepy 4.0 and up.
 twitter bot utils 0.14
 
+Specifically used by Chris Westersund to create twitter account @everylot_bflo (now defunct due to suspension for unknown reasons)
+
 
 # every lot bot
 
-This library supports a Twitter bot that posts Google Streetview pictures of every property in an SQLite database. 
+This library supports a Twitter bot that posts Google Streetview pictures of every property in an SQLite database.
 Existing instances of the bot: <a href="https://twitter.com/everylotnyc">@everylotnyc</a>, <a href="https://twitter.com/everylotchicago">@everylotchicago</a>, <a href="https://twitter.com/everylotsf">@everylotsf</a> and <a href="https://twitter.com/everylotla">@everylotla</a>. Since maps are instruments of power, these bots is a way of generating a tension between two different modes establishing power in urban space. [Read more about that](http://fakeisthenewreal.org/everylot/).
 
 ## What you'll need
@@ -61,7 +63,7 @@ Parcels_2015.dbf Parcels_2015.prj Parcels_2015.shp Parcels_2015.shx Parcels_2015
 
 While you're at it, make sure to download the metadata and carefully note the fields you'll want to track. At a minimum, you'll need an ID field and an address field. The address may be broken into several parts, that's fine. A field that tracts the number of floors would be nice, too.
 
-Now, you'll need to transform that Shapefile into an SQLite database. The database should have a table named `lots` with these fields: `id`, `lat`, `lon`, `tweeted` (the last should be set to zero initially). You must also have some fields that represent the address, like `address`, `city` and `state`. Or, you might have `address_number`, `street_name` and `city`. Optionally, a `floors` field is useful for pointing the Streetview "camera". 
+Now, you'll need to transform that Shapefile into an SQLite database. The database should have a table named `lots` with these fields: `id`, `lat`, `lon`, `tweeted` (the last should be set to zero initially). You must also have some fields that represent the address, like `address`, `city` and `state`. Or, you might have `address_number`, `street_name` and `city`. Optionally, a `floors` field is useful for pointing the Streetview "camera".
 
 (In the commands below, note that you don't have to type the "$", it's just there to mark the prompt where you enter the command.)
 
@@ -169,9 +171,9 @@ $ curl -G https://data.baltimorecity.gov/api/geospatial/rb22-mgti \
     -d method=export -d format=Shapefile -o baltimore.zip
 $ unzip baltimore.zip
 Archive:  baltimore.zip
-  inflating: geo_export_9f6b494d-b617-4065-a8e7-23adb09350bc.shp  
-  inflating: geo_export_9f6b494d-b617-4065-a8e7-23adb09350bc.shx  
-  inflating: geo_export_9f6b494d-b617-4065-a8e7-23adb09350bc.dbf  
+  inflating: geo_export_9f6b494d-b617-4065-a8e7-23adb09350bc.shp
+  inflating: geo_export_9f6b494d-b617-4065-a8e7-23adb09350bc.shx
+  inflating: geo_export_9f6b494d-b617-4065-a8e7-23adb09350bc.dbf
   inflating: geo_export_9f6b494d-b617-4065-a8e7-23adb09350bc.prj
 
 # Get a simpler name
@@ -192,7 +194,7 @@ fulladdr: String (254.0)
 ...
 
 # Create an SQLite database, reprojecting the geometries to WGS84. Keep only the desired fields
-$ ogr2ogr -f SQLite baltimore_raw.db baltimore.shp baltimore -t_srs EPSG:4326 
+$ ogr2ogr -f SQLite baltimore_raw.db baltimore.shp baltimore -t_srs EPSG:4326
     -nln baltimore -select parcelnum,blocknum,fulladdr
 
 # Convert feature centroid to integer latitude, longitude
