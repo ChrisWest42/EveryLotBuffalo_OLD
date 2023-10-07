@@ -2,7 +2,7 @@
 Now uses tweepy 4.0 and up.
 twitter bot utils 0.14
 
-Specifically used by Chris Westersund to create twitter account @everylot_bflo (now defunct due to suspension for unknown reasons)
+This repo set up by Chris Westersund for twitter account @everylot_bflo (now defunct due to suspension)
 
 
 # every lot bot
